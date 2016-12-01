@@ -39,7 +39,7 @@ services:
       RACK_ENV:
       REDIS_URL: 'redis://redis:6379'
       RAILS_ENV:
-    image: docker push registry.gitlab.com/puppet-debugger/enterprise-webapp
+    image: registry.gitlab.com/puppet-debugger/enterprise-webapp
     entrypoint: bash /home/www/app/wait_for_it.sh db
     working_dir: /home/www/app/
     command:
