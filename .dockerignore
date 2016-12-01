@@ -1,0 +1,21 @@
+# https://docs.docker.com/engine/reference/builder/#/dockerignore-file
+.bundle/
+.dpl/
+.git/
+.idea/
+coverage/
+docs/
+test/
+.*
+*.md
+docker-compose.yml
+Dockerfile
+Production_Dockerfile
+build_pgadmin.sh
+pgadmin_dockerfile
+scripts
+pgadmin_config.py
+pgadmin_start.sh
+bash_profile
+image_setup.sh
+tools.sh

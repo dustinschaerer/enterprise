@@ -1,0 +1,54 @@
+# In order to pull images from internal registries you need to login
+# example: docker login registry.gitlab.com
+# enter login credentials when prompted
+version: '2'
+services:
+#  redis:
+#    image: redis
+#    hostname: redis
+#    ports:
+#      - "6379"
+#  pgadmin:
+#    hostname: pgadmin
+#    environment:
+#      CONN_NAME: debugger_enterprise
+#      CONN_PORT: 5432
+#      CONN_HOSTNAME: db
+#      CONN_USER:
+#    image: logicminds/pgadmin
+#    working_dir: /root
+#    ports:
+#      - '5050:5050'
+  db:
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      PGPORT: 5432
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    image: postgres:9.5
+  web:
+    environment:
+      POSTGRES_USER:
+      PGUSER:
+      POSTGRES_PASSWORD:
+      POSTGRES_HOST: db
+      PGPASSWORD:
+      PORT: 3000
+      RACK_ENV:
+      REDIS_URL: 'redis://redis:6379'
+      RAILS_ENV:
+    image: docker push registry.gitlab.com/puppet-debugger/enterprise-webapp
+    entrypoint: bash /home/www/app/wait_for_it.sh db
+    working_dir: /home/www/app/
+    command:
+      - /bin/bash
+      - /home/www/app/startup_script.sh
+    volumes:
+      - .:/home/www/app/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      #- redis

@@ -1,0 +1,12 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+gem_bin=~/bin
+PATH=$gem_bin:$PATH:$HOME/bin
+export GEM_HOME="${HOME}/.gems"
+export PATH

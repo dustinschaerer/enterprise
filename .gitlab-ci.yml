@@ -1,0 +1,212 @@
+variables:
+  POSTGRES_DB:
+  POSTGRES_USER:
+  PGPORT: '5432'
+  RAILS_ENV: test
+  HEROKU_STAGING_APP:
+  HEROKU_PROD_APP:
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH:latest
+  CONTAINER_COMMIT_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH:$CI_BUILD_REF_NAME
+
+# this is the base test image
+image: registry.gitlab.com/puppet-debugger/above:master
+
+stages:
+  #- build
+  - validate
+  - test
+  - security_scan
+  - release
+  - deploy
+
+# builds the base container used for testing this pipeline
+container_build:
+  stage: validate
+  image: 'docker:1.11.1'
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+    - echo $CONTAINER_TEST_IMAGE
+  tags:
+    - docker
+  only:
+    - branches
+    - tags@puppet-debugger/enterprise-webapp
+
+# promotes the test container to a release image
+container_release_build:
+  stage: release
+  image: 'docker:1.11.1'
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+    - echo $CONTAINER_RELEASE_IMAGE
+  tags:
+    - docker
+  only:
+    - master@puppet-debugger/enterprise-webapp
+
+# promotes the test container to a release image that is tagged with a version
+container_tagged_build:
+  stage: release
+  image: 'docker:1.11.1'
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build --pull -t $CONTAINER_COMMIT_IMAGE -f Production_Dockerfile .
+    - docker push $CONTAINER_COMMIT_IMAGE
+    - echo $CONTAINER_COMMIT_IMAGE
+  only:
+    - tags@puppet-debugger/enterprise-webapp
+  tags:
+    - docker
+
+rails_best_practices:
+  stage: validate
+  allow_failure: true
+  only:
+    - branches
+  tags:
+    - ruby2.2
+  script:
+    - bundle install
+    - bundle exec rails_best_practices
+
+rubocop_ruby:
+  stage: validate
+  only:
+    - branches
+  tags:
+    - ruby2.2
+  script:
+    - bundle install
+    - bundle exec rake rubocop
+
+rubocop_rails:
+  stage: validate
+  only:
+    - branches
+  tags:
+    - ruby2.2
+  script:
+    - bundle install
+    - bundle exec rubocop -R
+
+scss-lint:
+  stage: validate
+  only:
+    - branches
+  tags:
+    - ruby2.2
+  script:
+    - bundle install
+    - bundle exec scss-lint
+
+bundler:audit:
+  stage: security_scan
+  only:
+    - branches
+  tags:
+    - ruby2.2
+  script:
+    - bundle install
+    - bundle exec rake bundle:audit
+
+brakeman:
+  stage: security_scan
+  only:
+    - branches
+  tags:
+    - ruby2.2
+  script:
+    - bundle install
+    - bundle exec brakeman
+
+test:2.3:
+  tags:
+    - ruby2.2
+  only:
+    - branches
+  services:
+    - postgres:9.5
+  script:
+    - bundle install
+    - bundle exec rails db:environment:set
+    - bundle exec rake parallel:setup[2]
+    - bundle exec rake parallel:test[2]
+  variables:
+    RAILS_ENV: test
+  stage: test
+
+# deploy to staging environment on on new commits to master
+staging:
+  type: deploy
+  tags:
+    - ruby2.2
+  script:
+    - source /home/www/.profile
+    - gem install dpl
+    - dpl --provider=heroku --strategy=git --app=$HEROKU_STAGING_APP --api-key=$HEROKU_STAGING_API_KEY
+  only:
+    - master@puppet-debugger/enterprise-webapp
+
+production:
+  type: deploy
+  tags:
+    - ruby2.2
+  script:
+    - source /home/www/.profile
+    - gem install dpl
+    - dpl --provider=heroku --strategy=git --app=$HEROKU_PROD_APP --api-key=$HEROKU_PRODUCTION_API_KEY
+  only:
+    - tags@puppet-debugger/enterprise-webapp
+
+bump_and_tag:
+  type: release
+  when: manual
+  tags:
+    - ruby2.2
+  only:
+    - master@puppet-debugger/enterprise-webapp
+  script:
+    - bundle install
+    - bundle exec bump_and_tag
+
+write_checksum:
+  type: release
+  when: manual
+  tags:
+    - ruby2.2
+  only:
+    - master@puppet-debugger/enterprise-webapp
+  script:
+    - bundle install
+    - bundle exec bump_and_tag.rb -c --no-tag
+
+# javascript testing
+# teaspoon:
+#   stage: test
+#   script:
+#     - RAILS_ENV=test bundle exec teaspoon
+#
+
+#
+# flog:
+#   stage: test
+#   script:
+#     - bundle exec rake flog
+#
+# flay:
+#   stage: test
+#   script:
+#     - bundle exec rake flay
+
+#  - notifications
+
+#
+#
+#
+#
