@@ -25,16 +25,17 @@ services:
       - "5432:5432"
     environment:
       PGPORT: 5432
-      POSTGRES_USER: stan
-      POSTGRES_PASSWORD: superduper1!
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
     image: postgres:9.5
   web:
     environment:
-      POSTGRES_USER: stan
-      PGUSER: stan
-      POSTGRES_PASSWORD: superduper1!
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      PGUSER:
+      PGPASSWORD:
       POSTGRES_HOST: db
-      PGPASSWORD: superduper1!
+      DATABASE_PORT: 5432
       PORT: 3000
       RACK_ENV:
       REDIS_URL: 'redis://redis:6379'

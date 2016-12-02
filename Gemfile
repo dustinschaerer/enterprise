@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'foreman'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use postgresql as the database for Active Record
@@ -31,12 +31,37 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  platforms :mri do
+    gem 'ruby-prof'
+  end
+  gem 'bundler-audit', require: false
+  gem 'brakeman', require: false
+  # http://ruby.sadi.st/Ruby_Sadist.html
+  # gem 'flay'
+  # gem 'heckle'
+  # gem 'flog'
+  # gem 'teaspoon'
+  gem 'scss_lint', require: false
+  gem 'rubocop', require: false
+  gem 'parallel_tests'
+  gem 'rails-controller-testing'
+  # gem 'rails-perftest'
+  gem 'minitest-spec-rails'
+  gem 'simplecov', require: false
+  gem 'rails_best_practices', require: false
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'pry'
+  gem 'pry-rails'
   gem 'listen', '~> 3.0.5'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

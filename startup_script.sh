@@ -2,7 +2,7 @@
 RAILS_ENV="${RAILS_ENV:-development}"
 echo "Using RAILS ENV: ${RAILS_ENV}"
 # just in case the pid did not get removed
-rm -f /home/www/above_on_web/tmp/pids/server.pid
+rm -f /home/www/app/tmp/pids/server.pid
 bundle install
 # return 0 if db exists
 function db_exists() {
