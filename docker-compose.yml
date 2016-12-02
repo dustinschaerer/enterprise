@@ -22,9 +22,9 @@ services:
   db:
     hostname: postgres
     ports:
-      - "5432:5432"
+      - 5433
     environment:
-      PGPORT: 5432
+      PGPORT:
       POSTGRES_USER:
       POSTGRES_PASSWORD:
     image: postgres:9.5
@@ -35,7 +35,7 @@ services:
       PGUSER:
       PGPASSWORD:
       POSTGRES_HOST: db
-      DATABASE_PORT: 5432
+      PGPORT:
       PORT: 3000
       RACK_ENV:
       REDIS_URL: 'redis://redis:6379'
