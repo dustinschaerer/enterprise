@@ -1,0 +1,1 @@
+json.array! @puppet_modules, partial: 'puppet_modules/puppet_module', as: :puppet_module

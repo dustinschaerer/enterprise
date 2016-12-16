@@ -1,0 +1,21 @@
+%h1 Listing ruby_versions
+
+%table
+  %thead
+    %tr
+      %th Version
+      %th
+      %th
+      %th
+
+  %tbody
+    - @ruby_versions.each do |ruby_version|
+      %tr
+        %td= ruby_version.version
+        %td= link_to 'Show', ruby_version
+        %td= link_to 'Edit', edit_ruby_version_path(ruby_version)
+        %td= link_to 'Destroy', ruby_version, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Ruby version', new_ruby_version_path

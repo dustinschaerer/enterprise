@@ -1,0 +1,13 @@
+= simple_form_for(@puppet_module) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :version
+    = f.input :version_release_date
+    = f.input :owner
+    = f.input :slug
+    = f.input :uri
+
+  .form-actions
+    = f.button :submit

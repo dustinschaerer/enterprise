@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Version:
+  = @ruby_version.version
+
+= link_to 'Edit', edit_ruby_version_path(@ruby_version)
+\|
+= link_to 'Back', ruby_versions_path

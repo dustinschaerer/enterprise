@@ -22,7 +22,7 @@ services:
   db:
     hostname: postgres
     ports:
-      - 5433
+      - 5432
     environment:
       PGPORT:
       POSTGRES_USER:

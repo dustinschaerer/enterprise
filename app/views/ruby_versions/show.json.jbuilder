@@ -1,0 +1,1 @@
+json.partial! "ruby_versions/ruby_version", ruby_version: @ruby_version

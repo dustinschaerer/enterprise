@@ -1,0 +1,1 @@
+json.partial! "puppet_modules/puppet_module", puppet_module: @puppet_module
