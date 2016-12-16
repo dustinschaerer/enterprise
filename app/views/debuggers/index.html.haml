@@ -1,0 +1,32 @@
+%h1 Listing debuggers
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Ruby version
+      %th Puppet version
+      %th Puppet Modules
+      %th
+      %th
+      %th
+
+  %tbody
+    - @debuggers.each do |debugger|
+      %tr
+        %td= debugger.name
+        %td= debugger.description
+        %td= debugger.ruby_version.version
+        %td= debugger.puppet_version.version
+        %td
+          - debugger.puppet_modules.each do |pm|
+            = pm.name
+            %br
+        %td= link_to 'Show', debugger
+        %td= link_to 'Edit', edit_debugger_path(debugger)
+        %td= link_to 'Destroy', debugger, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Debugger', new_debugger_path

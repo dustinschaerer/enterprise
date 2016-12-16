@@ -1,0 +1,17 @@
+= simple_form_for(@debugger) do |f|
+  = f.error_notification
+
+  - if @debugger.errors.full_messages.any?
+    - @debugger.errors.full_messages.each do |error_message|
+      = error_message if @debugger.errors.full_messages.first == error_message
+
+
+  .form-inputs
+    = f.input :name
+    = f.input :description
+    = f.association :ruby_version, label_method: :version
+    = f.association :puppet_version, label_method: :version
+    = f.association :puppet_modules, label_method: :name
+
+  .form-actions
+    = f.button :submit

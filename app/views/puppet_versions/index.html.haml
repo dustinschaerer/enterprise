@@ -1,0 +1,21 @@
+%h1 Listing puppet_versions
+
+%table
+  %thead
+    %tr
+      %th Version
+      %th
+      %th
+      %th
+
+  %tbody
+    - @puppet_versions.each do |puppet_version|
+      %tr
+        %td= puppet_version.version
+        %td= link_to 'Show', puppet_version
+        %td= link_to 'Edit', edit_puppet_version_path(puppet_version)
+        %td= link_to 'Destroy', puppet_version, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Puppet version', new_puppet_version_path

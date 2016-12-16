@@ -1,0 +1,1 @@
+json.partial! "puppet_versions/puppet_version", puppet_version: @puppet_version

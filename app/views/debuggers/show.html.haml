@@ -1,0 +1,25 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @debugger.name
+%p
+  %b Description:
+  = @debugger.description
+%p
+  %b Ruby version:
+  = @debugger.ruby_version
+%p
+  %b Puppet version:
+  = @debugger.puppet_version
+
+%p
+  %b Puppet Modules:
+  - @debugger.puppet_modules.each do |pm|
+    = pm.name
+    %br
+
+
+= link_to 'Edit', edit_debugger_path(@debugger)
+\|
+= link_to 'Back', debuggers_path

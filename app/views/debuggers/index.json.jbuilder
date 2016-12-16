@@ -1,0 +1,1 @@
+json.array! @debuggers, partial: 'debuggers/debugger', as: :debugger

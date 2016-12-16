@@ -1,0 +1,30 @@
+/ - if user_signed_in?
+/   %h6 You are signed in as #{current_user.email}
+/   %small You can #{link_to 'logout', destroy_user_session_path, method: 'delete'}, or visit your #{link_to 'Profile', current_user_path} now.
+/ - else
+/   = form_for("user", url: main_app.new_user_session_url(protocol: Rails.env.production? ? 'https' : 'http'), html: {class: 'login-form'}) do |f|
+/     %fieldset.form-group
+/       = f.text_field :login, placeholder: "Login", class: 'form-control'
+/     %fieldset.form-group
+/       = f.password_field :password, placeholder: "Password", class: 'form-control'
+/     %fieldset.form-group{style: local_assigns[:submit_button] == false ? 'visibility: hidden; height: 0; margin-bottom: 0;' : ''}
+/       = f.button 'Login', class: 'btn btn-primary-outline btn-block', data: {error_class: 'btn-danger-outline'}
+/     .errors.color-brand-danger
+/     %fieldset
+/       = f.check_box :remember_me
+/       = f.label :remember_me, style: "font-size: .8rem"
+/     %small.text-muted
+/       = link_to "Forgot your password?", Rails.application.routes.url_helpers.new_user_password_path
+/       | #{link_to "Join now", Setting.member_page_url}
+
+
+
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .form-inputs
+    = f.input :email, required: false, autofocus: true
+    = f.input :password, required: false
+    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+  .form-actions
+    = f.button :submit, "Log in", class: 'btn btn-primary'
+
+  = render "devise/shared/links"

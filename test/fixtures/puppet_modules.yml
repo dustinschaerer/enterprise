@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  version: MyString
+  version_release_date: MyString
+  owner: MyString
+  slug: MyString
+  uri: MyString
+
+two:
+  name: MyString
+  version: MyString
+  version_release_date: MyString
+  owner: MyString
+  slug: MyString
+  uri: MyString

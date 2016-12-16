@@ -1,0 +1,1 @@
+json.array! @puppet_versions, partial: 'puppet_versions/puppet_version', as: :puppet_version

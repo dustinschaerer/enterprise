@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  ruby_version: one
+  puppet_version: one
+
+two:
+  name: MyString
+  description: MyText
+  ruby_version: two
+  puppet_version: two

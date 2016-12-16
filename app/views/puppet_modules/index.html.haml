@@ -1,0 +1,31 @@
+%h1 Listing puppet_modules
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Version
+      %th Version release date
+      %th Owner
+      %th Slug
+      %th Uri
+      %th
+      %th
+      %th
+
+  %tbody
+    - @puppet_modules.each do |puppet_module|
+      %tr
+        %td= puppet_module.name
+        %td= puppet_module.version
+        %td= puppet_module.version_release_date
+        %td= puppet_module.owner
+        %td= puppet_module.slug
+        %td= puppet_module.uri
+        %td= link_to 'Show', puppet_module
+        %td= link_to 'Edit', edit_puppet_module_path(puppet_module)
+        %td= link_to 'Destroy', puppet_module, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Puppet module', new_puppet_module_path

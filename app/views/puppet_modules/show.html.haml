@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @puppet_module.name
+%p
+  %b Version:
+  = @puppet_module.version
+%p
+  %b Version release date:
+  = @puppet_module.version_release_date
+%p
+  %b Owner:
+  = @puppet_module.owner
+%p
+  %b Slug:
+  = @puppet_module.slug
+%p
+  %b Uri:
+  = @puppet_module.uri
+
+= link_to 'Edit', edit_puppet_module_path(@puppet_module)
+\|
+= link_to 'Back', puppet_modules_path

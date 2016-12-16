@@ -19,3 +19,4 @@ pgadmin_start.sh
 bash_profile
 image_setup.sh
 tools.sh
+node_modules/

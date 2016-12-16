@@ -1,0 +1,15 @@
+.container-fluid
+  .row
+    .col-xs-12.mt-3.mb-3
+      %h2.text-center All Profiles
+
+  #profiles.card-columns
+    - @profiles.each do |profile|
+      .card
+        .card-block
+          %h4.card-title
+            = profile.firstname
+            = profile.lastname
+          %p.card-text= link_to 'Show', profile
+          %p.card-text
+            %small.text-muted Last updated 3 mins ago

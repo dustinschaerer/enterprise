@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Version:
+  = @puppet_version.version
+
+= link_to 'Edit', edit_puppet_version_path(@puppet_version)
+\|
+= link_to 'Back', puppet_versions_path
