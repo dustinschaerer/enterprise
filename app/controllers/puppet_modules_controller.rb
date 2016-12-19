@@ -4,7 +4,7 @@ class PuppetModulesController < ApplicationController
   # GET /puppet_modules
   # GET /puppet_modules.json
   def index
-    @puppet_modules = PuppetModule.all
+    @puppet_modules = PuppetModule.all.order(:downloads)
   end
 
   # GET /puppet_modules/1

@@ -1,31 +1,41 @@
-%h1 Listing puppet_modules
+.container-fluid
+  .row
+    .col-xs-12
+      %h1 Puppet Modules
+      = link_to 'New Puppet module', new_puppet_module_path, class: 'btn btn-primary'
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Version
-      %th Version release date
-      %th Owner
-      %th Slug
-      %th Uri
-      %th
-      %th
-      %th
+      %table.table.table-striped.table-sm
+        %thead.thead-inverse
+          %tr
+            %th Name
+            %th Slug
+            %th URI
+            %th Downloads
+            %th Supported
+            %th Homepage URL
+            %th Owner
+            %th Current Release Version
+            %th Release Supported?
+            %th
+            %th
+            %th
 
-  %tbody
-    - @puppet_modules.each do |puppet_module|
-      %tr
-        %td= puppet_module.name
-        %td= puppet_module.version
-        %td= puppet_module.version_release_date
-        %td= puppet_module.owner
-        %td= puppet_module.slug
-        %td= puppet_module.uri
-        %td= link_to 'Show', puppet_module
-        %td= link_to 'Edit', edit_puppet_module_path(puppet_module)
-        %td= link_to 'Destroy', puppet_module, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %tbody
+          - @puppet_modules.each do |puppet_module|
+            %tr
+              %td= puppet_module.name
+              %td= puppet_module.slug
+              %td= puppet_module.uri
+              %td= puppet_module.downloads
+              %td= puppet_module.supported
+              %td= puppet_module.homepage_url
+              %td= puppet_module.owner
+              %td= puppet_module.current_release_version
+              %td= puppet_module.release_supported
+              %td= link_to 'Show', puppet_module
+              %td= link_to 'Edit', edit_puppet_module_path(puppet_module)
+              %td= link_to 'Destroy', puppet_module, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+      %br
 
-= link_to 'New Puppet module', new_puppet_module_path
+      = link_to 'New Puppet module', new_puppet_module_path, class: 'btn btn-primary'

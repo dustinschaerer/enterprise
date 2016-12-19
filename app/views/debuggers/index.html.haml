@@ -1,32 +1,65 @@
-%h1 Listing debuggers
-
-%table.table.table-striped
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Ruby version
-      %th Puppet version
-      %th Puppet Modules
-      %th
-      %th
-      %th
-
-  %tbody
+.container-fluid
+  .row
+    .col-xs-12
+      %h1.text-center.my-3 
+        Debuggers
+  .row
     - @debuggers.each do |debugger|
-      %tr
-        %td= debugger.name
-        %td= debugger.description
-        %td= debugger.ruby_version.version
-        %td= debugger.puppet_version.version
-        %td
-          - debugger.puppet_modules.each do |pm|
-            = pm.name
-            %br
-        %td= link_to 'Show', debugger
-        %td= link_to 'Edit', edit_debugger_path(debugger)
-        %td= link_to 'Destroy', debugger, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      .col-xs-12.col-sm-6.col-md-4  
+        .demo-card
+          %div{ :id => "#{debugger.id}"}
+            .card-header
+              %h4.card-title= debugger.name
+              = debugger.description
+            %img.card-img-top.img-fluid{:src => "http://placehold.it/450x200"}/
+            .card-block
+              %h6.card-subtitle.text-muted
+                Ruby: 
+                = debugger.ruby_version.version
+              %br  
+              %h6.card-subtitle.text-muted
+                Puppet: 
+                = debugger.puppet_version.version
+              %br
+              %h6.card-subtitle.text-muted Puppet Modules:
+              %ul.list-group.list-group-flush
+                - debugger.puppet_modules.each do |pm|
+                  %li.list-group-item= pm.name
+            .card-block
+              %a.btn.btn-primary{:href => "#"} Grab This
+              %a.btn.btn-primary{:href => "#"} Details
+              / %a.card-link{:href => "#"} Details
+            .card-footer.text-muted
+              This is a card footer
 
-%br
 
-= link_to 'New Debugger', new_debugger_path
+
+/ %table.table.table-striped
+/   %thead
+/     %tr
+/       %th Name
+/       %th Description
+/       %th Ruby version
+/       %th Puppet version
+/       %th Puppet Modules
+/       %th
+/       %th
+/       %th
+/ %tbody
+/    - @debuggers.each do |debugger|
+/       %tr
+/         %td= debugger.name
+/         %td= debugger.description
+/         %td= debugger.ruby_version.version
+/         %td= debugger.puppet_version.version
+/         %td
+/           - debugger.puppet_modules.each do |pm|
+/             = pm.name
+/             %br
+/         %td= link_to 'Show', debugger
+/         %td= link_to 'Edit', edit_debugger_path(debugger)
+/         %td= link_to 'Destroy', debugger, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+/ %br
+
+/ = link_to 'New Debugger', new_debugger_path

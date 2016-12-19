@@ -1,7 +1,7 @@
 .container.my-3
   .row
-    .col-xs-12
-      My Profile
+    .col-xs-12.c
+      %h2 My Profile
   .row
     .col-xs-12.col-sm-3
       .card
@@ -13,5 +13,35 @@
             %small.text-muted=@profile.user.email
     .col-xs-12.col-sm-9
       = render 'form'
+  
+  .row
+    .col-xs-12.col-sm-6.col-md-4.col.lg-3
+      = @profile.user.debuggers.each do |debugger|
+        .demo-card
+          %div{ :id => "#{debugger.id}"}
+            .card-header
+              %h4.card-title= debugger.name
+              = debugger.description
+            %img.card-img-top.img-fluid{:src => "http://placehold.it/450x200"}/
+            .card-block
+              %h6.card-subtitle.text-muted
+                Ruby: 
+                = debugger.ruby_version.version
+              %br  
+              %h6.card-subtitle.text-muted
+                Puppet: 
+                = debugger.puppet_version.version
+              %br
+              %h6.card-subtitle.text-muted Puppet Modules:
+              %ul.list-group.list-group-flush
+                - debugger.puppet_modules.each do |pm|
+                  %li.list-group-item= pm.name
+            .card-block
+              %a.btn.btn-primary{:href => "#"} Grab This
+              %a.btn.btn-primary{:href => "#"} Details
+              / %a.card-link{:href => "#"} Details
+            .card-footer.text-muted
+              This is a card footer
+
 
 

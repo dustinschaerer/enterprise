@@ -12,6 +12,7 @@
     = f.association :ruby_version, label_method: :version
     = f.association :puppet_version, label_method: :version
     = f.association :puppet_modules, label_method: :name
+    = f.hidden_field :user_id, value: current_user.id
 
   .form-actions
     = f.button :submit

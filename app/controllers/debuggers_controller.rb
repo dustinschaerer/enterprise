@@ -30,6 +30,8 @@ class DebuggersController < ApplicationController
     @debugger.save
     puppet_module_ids = params[:debugger][:puppet_module_ids]
 
+    
+    @debugger.users << User.find(params[:debugger][:user_id])
 
     params[:debugger][:puppet_module_ids].each do |pm_id|
       @debugger.puppet_modules << PuppetModule.find(pm_id) unless pm_id.blank?

@@ -3,11 +3,14 @@
 
   .form-inputs
     = f.input :name
-    = f.input :version
-    = f.input :version_release_date
-    = f.input :owner
     = f.input :slug
     = f.input :uri
+    = f.input :downloads
+    = f.input :supported
+    = f.input :homepage_url
+    = f.input :owner
+    = f.input :current_release_version
+    = f.input :release_supported
 
   .form-actions
     = f.button :submit
