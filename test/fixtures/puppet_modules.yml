@@ -1,17 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  version: MyString
-  version_release_date: MyString
-  owner: MyString
-  slug: MyString
-  uri: MyString
-
-two:
-  name: MyString
-  version: MyString
-  version_release_date: MyString
-  owner: MyString
-  slug: MyString
-  uri: MyString
+puppet_module_one:
+  name: docker
+  slug: childbdm-docker
+  uri:  /v3/modules/childbdm-docker
+  downloads: 68
+  supported: false
+  homepage_url:
+  owner: childbdm
+  current_release_version: 0.1.0
+  release_supported: false

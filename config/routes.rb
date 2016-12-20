@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "dashboard#index"
   resources :profiles
+
+  resources :user_debugger_assignments, only: [:create, :destroy]
 end

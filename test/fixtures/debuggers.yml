@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
-  ruby_version: one
-  puppet_version: one
+debugger_one:
+  name: BeanPile Stack 2016
+  description: Current stack for Dec 2016 for BeanPile web storefront
+  ruby_version: ruby_version_three
+  puppet_version: puppet_version_four_eight
 
-two:
-  name: MyString
-  description: MyText
-  ruby_version: two
-  puppet_version: two
+debugger_two:
+  name: Serious Stack
+  description: Serious stack for Serious Company
+  ruby_version: ruby_version_two
+  puppet_version: puppet_version_four_eight

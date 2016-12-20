@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  version: MyString
+puppet_version_four_eight:
+  version: 4.8
 
-two:
-  version: MyString
+puppet_version_four_nine:
+  version: 4.9

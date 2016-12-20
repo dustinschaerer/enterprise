@@ -12,4 +12,8 @@ class Debugger < ApplicationRecord
   accepts_nested_attributes_for :user_debugger_assignments
   accepts_nested_attributes_for :puppet_modules
   accepts_nested_attributes_for :users
+
+  validates_presence_of :name, :ruby_version, :puppet_version
+  validates_uniqueness_of :name
+
 end

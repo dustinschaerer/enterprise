@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  version: MyString
+ruby_version_one:
+  version: 2.1.10
 
-two:
-  version: MyString
+ruby_version_two:
+  version: 2.2.6
+
+ruby_version_three:
+  version: 2.3.1

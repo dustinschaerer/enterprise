@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+profile_one:
   user: john
   firstname: John
   lastname: Doe
 
-two:
+profile_two:
   user: julie
   firstname: Julie
   lastname: Smith
